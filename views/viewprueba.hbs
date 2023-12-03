@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FetchEmail</title>
+    <link rel="stylesheet" href="/stylessheets/styles.css" media="screen">
+  </head>
+  <body>
+    {{! if hbs}}
+    {{#if lastName}}
+      <h1>{{saludos}}</h1>
+    {{/if}}
+
+    {{! "{x3 ≤></> }x3" para etiquetas}}
+    {{! if else}}
+    {{#if havePet}}
+      <h1> la mascota {{mascota}}</h1>
+    {{else}}
+      <h1> no tiene felicidad</h1>
+    {{/if}}
+
+    {{! negacion de if}}
+    {{#unless mascota}}
+      <h3> no mascota </h3>
+    {{/unless}}
+
+    {{! each}}
+    <ul>
+      {{#each mascotas}}
+        <li> {{this.name}} </li>
+      {{/each}}
+    </ul>
+  </body>
+</html>

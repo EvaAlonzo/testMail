@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modals</title>
+    <link rel="stylesheet" href="/public/stylessheets/styles.css" media="screen">
+</head>
+<body>
+
+    <dialog id="modal" class="modal">
+        <div class="modalContent">
+            <h1>¿Cuál es tú edad?</h1>
+            <form method="dialog">
+                <label id="birthDate">Fecha de Nacimiento:
+                    <input type="date" id="date" max="" required></label>
+            <button onclick="d_date()" id="btnClose" class="close" type="submit">
+                Done</button>
+            </form>
+        </div>
+    </dialog>
+    <dialog id="modal2">
+    <h1 id="resultAge"></h1>
+    <button id="close2"> Ok </button>
+</dialog>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function (){
+        const btnCloseModal = document.querySelector("#btnClose");
+        const modal = document.querySelector("#modal");
+        const btnCloseModal2 = document.querySelector("#close2");
+        const modal2 = document.querySelector("#modal2");
+        const dateInput = document.getElementById("date");
+        const today = new Date().toISOString().split('T')[0];
+        const bodyImg = document.querySelectorAll("img");
+
+        dateInput.setAttribute("max", today);
+
+        bodyImg.forEach(function (img) {
+            img.addEventListener('click', function (){
+            const imgLink = img.parentElement.href;
+            console.log('Imagen clicada, enlace:', imgLink);
+                window.location.href = 'https://www.fetch.com';
+        });
+        });
+
+        function toggleScroll(enable) {
+            document.body.style.overflow = enable ? 'auto' : 'hidden';
+        }
+
+    modal.showModal();
+        toggleScroll(false);
+        btnCloseModal.addEventListener('click', function (){
+            modal.style.display = 'none';
+            modal2.showModal();
+            toggleScroll(false);
+                btnCloseModal2.addEventListener('click', function (){
+                modal2.style.display = 'none';
+                toggleScroll(true);
+                });
+        }); 
+
+});
+
+    function d_date() {
+        let birthDate = document.getElementById("date").value;
+        let today = new Date();
+        let birthDateObj = new Date(birthDate);
+        let age = today.getFullYear() - birthDateObj.getFullYear();
+
+            if(today.getMonth() < birthDateObj.getMonth() || today.getMonth() === birthDateObj.getMonth() && today.getDate()< birthDateObj.getDate()){
+            age--
+            }
+            console.log("DATE", age)
+        document.getElementById('resultAge').innerHTML = "You are " + age + " years old";
+
+        if(age <= 35 ){
+            document.getElementById('sm').innerHTML = document.getElementById('sm1').innerHTML
+            document.getElementById('sm1').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm2').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm3').innerHTML = document.getElementById('smm').innerHTML
+        }else if(age > 35 && age <=55){
+            document.getElementById('sm').innerHTML = document.getElementById('sm2').innerHTML
+            document.getElementById('sm1').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm2').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm3').innerHTML = document.getElementById('smm').innerHTML
+        }else{
+            document.getElementById('sm').innerHTML = document.getElementById('sm3').innerHTML
+            document.getElementById('sm1').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm2').innerHTML = document.getElementById('smm').innerHTML
+            document.getElementById('sm3').innerHTML = document.getElementById('smm').innerHTML
+        }
+        
+
+    };
+
+</script>
+</body>
+</html>
